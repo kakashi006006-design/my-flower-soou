@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>بوكيه ورد لسو 💐</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Cairo,sans-serif;color:#71384f;background:radial-gradient(circle at top,#fffafd,#ffe4ed 55%,#f8bfd2);overflow-x:hidden}
+main{min-height:100vh;display:grid;place-items:center;padding:22px}.card{width:min(520px,100%);text-align:center;background:#ffffffd9;border:1px solid white;box-shadow:0 20px 60px #b64c7726;border-radius:30px;padding:28px 22px;position:relative;overflow:hidden}
+h1{font-size:clamp(27px,7vw,40px);margin:4px 0;color:#b94d78}.sub{font-size:15px;color:#98647a;margin:0 0 14px}.art{height:220px;display:grid;place-items:center}.bouquet{font-size:100px;filter:drop-shadow(0 12px 12px #a94d6b30);animation:bob 3s ease-in-out infinite;user-select:none}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
+.message{font-size:17px;line-height:2;min-height:76px;margin:8px auto 16px;max-width:410px;white-space:pre-line}
+button{font:700 15px Cairo,sans-serif;border:0;border-radius:999px;padding:12px 23px;background:linear-gradient(135deg,#d96b96,#b94775);color:white;box-shadow:0 8px 20px #b9477533;cursor:pointer;margin:4px}
+.secondary{background:white;color:#a4446b;border:1px solid #f4c1d3;box-shadow:none}.hidden{display:none}.note{font-size:12px;color:#ad7c90;margin-top:17px}.heart{position:absolute;color:#e78aaa;opacity:.65}.petal{position:fixed;top:-30px;pointer-events:none;animation:fall linear forwards;z-index:3}@keyframes fall{to{transform:translateY(110vh) rotate(620deg);opacity:.15}}
+</style></head>
+<body><main><section class="card" aria-live="polite">
+<div class="heart" style="top:20px;right:24px;font-size:22px">♡</div><div class="heart" style="top:68px;left:25px;font-size:17px">✦</div>
+<div id="intro"><p class="sub">هدية صغيرة من قلبي لقلبك</p><h1>بوكيه ورد لسو 🌷</h1><div class="art"><div class="bouquet">💐</div></div>
+<p class="message">يا سو، عملتلك حاجة صغيرة مخصوص عشانك… افتحي هديتك يا بطتي 💗</p><button onclick="openGift()">افتحي هديتك 💌</button></div>
+<div id="gift" class="hidden"><p class="sub">كل وردة معاها كلمة من قلبي 🌸</p><h1 id="flowerTitle"></h1><div class="art"><div class="bouquet" id="flower">🌹</div></div><p class="message" id="flowerMessage"></p><button onclick="nextFlower()">الوردة اللي بعدها 🌷</button></div>
+<div id="final" class="hidden"><p class="sub">رسالة أخيرة من قلبي ❤️</p><h1>يا سو، يا بطتي 💗</h1><div class="art"><div class="bouquet">💖</div></div>
+<p class="message">أنا مبسوط أوي إني عرفتك يا سو، إنتي حبيبتي وبطتي وحياتي وكل حاجة ليا. أنا هعمل كل اللي أقدر عليه يا حبيبتي علشان نفضل سوا. أنا بحبببك أوي بجد، ربنا يخليكي ليا وما يحرمنيش منك أبدًا يا حبيبتي. إنتي أجمل حاجة حصلتلي السنة دي، ويا رب نفضل العمر كله سوا. بحببببك ❤️</p><button onclick="restart()">أعيدي الهدية من الأول؟ ✨</button></div>
+<p class="note">اتعملت مخصوص عشانك يا سو 💗</p></section></main>
+<script>
+const flowers=[
+['🌹','الوردة الأولى','عيونك وضحكتك، بحبهم أوي وبيخلوني مبسوط ❤️'],
+['🌷','الوردة التانية','بحب طيبتك وحنّيتك معايا يا بطتي 💗'],
+['🌸','الوردة التالتة','أتمنى أكون سبب في سعادتك على طول يا سو ❤️'],
+['🌻','الوردة الرابعة','حتى وإحنا بعيد يا حبيبتي، بتبقي شاغلة تفكيري كله 🥹❤️'],
+['💐','الوردة الخامسة','مبسوط أوي إن إحنا اتقابلنا يا بطتي، وبحب اليوم اللي عرفتك فيه 🌷']
+];let index=0;
+function openGift(){document.getElementById('intro').classList.add('hidden');document.getElementById('gift').classList.remove('hidden');showFlower();petals(20)}
+function showFlower(){const f=flowers[index];document.getElementById('flower').textContent=f[0];document.getElementById('flowerTitle').textContent=f[1];document.getElementById('flowerMessage').textContent=f[2]}
+function nextFlower(){if(index<flowers.length-1){index++;showFlower();petals(12)}else{document.getElementById('gift').classList.add('hidden');document.getElementById('final').classList.remove('hidden');petals(30)}}
+function restart(){index=0;document.getElementById('final').classList.add('hidden');document.getElementById('intro').classList.remove('hidden')}
+function petals(n){for(let i=0;i<n;i++){let p=document.createElement('span');p.className='petal';p.textContent=['🌸','💗','🌷','✨'][Math.floor(Math.random()*4)];p.style.left=Math.random()*100+'vw';p.style.animationDuration=(3+Math.random()*4)+'s';p.style.fontSize=(14+Math.random()*18)+'px';document.body.appendChild(p);setTimeout(()=>p.remove(),7500)}}
+</script></body></html>
